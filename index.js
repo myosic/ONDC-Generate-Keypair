@@ -15,6 +15,10 @@ const fs = require('fs');
     const encr_key_public_base64 = sodium.to_base64(encr_key.publicKey, _sodium.base64_variants.ORIGINAL);
     const encr_key_private_base64 = sodium.to_base64(encr_key.privateKey, _sodium.base64_variants.ORIGINAL);
 
+    // Current date time
+    const date = new Date();
+    const date_string = date.toISOString();
+
     // Create a file
     let content = "ALL KEYS WILL BE BASE64 ENCODED";
     content = "\n------- Key pair for signing -------\n";
@@ -23,7 +27,8 @@ const fs = require('fs');
     content += "\n------- Key pair for encryption -------\n";
     content += "Public key: " + encr_key_public_base64 + "\n";
     content += "Private key: " + encr_key_private_base64 + "\n";
-    
+    content += "\n------- Date and time -------\n";
+    content += "Generated at : " + date_string + "\n";
     fs.writeFileSync('keypair.txt', content);
     console.log("File created. Check keypair.txt file for details");
 
